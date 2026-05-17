@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>SYNTO KITS</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════ КНОПКИ (фиксированные) ═══════════ -->
+<button id="theme-btn" onclick="toggleTheme()" title="Сменить тему">🌙</button>
+<button id="back-to-top" onclick="backToTop()">↑</button>
+<div id="toast"></div>
+
+<!-- ═══════════════════════════════════════════════
+     ГЛАВНАЯ СТРАНИЦА
+═══════════════════════════════════════════════ -->
+<div id="main-page">
+  <nav>
+    <a href="https://www.tiktok.com/@prodsynto"     target="_blank">TIK TOK</a>
+    <a href="https://www.youtube.com/@SyntoWav"    target="_blank">YOUTUBE</a>
+    <a href="https://www.beatstars.com/prodsynto"   target="_blank">BEATSTARS</a>
+    <a href="https://www.instagram.com/prodsynto"   target="_blank">INSTAGRAM</a>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg" id="hero-bg"></div>
+    <div class="hero-content">
+      <img class="hero-avatar"
+           src="me.jpg"
+           alt="SYNTO">
+      <div class="hero-title">SYNTO KITS</div>
+      <div class="hero-desc">Здесь собраны все эксклюзивные киты от SYNTO</div>
+      <button class="btn-cta" onclick="scrollToKits()">ЗАБРАТЬ СОУС</button>
+    </div>
+    <div class="scroll-hint">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+      ЛИСТАЙ ВНИЗ
+    </div>
+  </section>
+
+  <!-- Секция с каруселью китов -->
+  <section class="kits-section" id="kits-section">
+    <div class="kits-bg" id="kits-bg"></div>
+    <div class="kits-inner">
+      <div class="carousel-row">
+        <button class="arrow-btn" id="prev">‹</button>
+        <div class="card-wrap" id="card-wrap">
+          <div class="card-slider" id="card-slider"></div>
+        </div>
+        <button class="arrow-btn" id="next">›</button>
+      </div>
+      <div class="dots" id="dots"></div>
+      <div class="kit-info">
+        <div class="kit-name" id="kit-name"></div>
+        <button class="btn-inside" id="btn-inside">ЧТО ВНУТРИ?</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Футер -->
+  <footer>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/prodsynto"   target="_blank">INSTAGRAM</a>
+      <a href="https://www.youtube.com/@SyntoWav"    target="_blank">YOUTUBE</a>
+      <a href="https://www.beatstars.com/prodsynto"   target="_blank">BEATSTARS</a>
+      <a href="https://www.tiktok.com/@prodsynto"     target="_blank">TIK TOK</a>
+    </div>
+    <div class="footer-support">
+      Проблемы с сайтом?
+      <a href="https://t.me/syntooooooooo" target="_blank">Поддержка</a>
+    </div>
+    <div class="footer-copy">© 2026 SYNTO.</div>
+  </footer>
+
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     СТРАНИЦА ПРЕВЬЮ КИТА
+═══════════════════════════════════════════════ -->
+<div id="detail-page">
+  <div class="detail-hero">
+    <button class="detail-back" onclick="closeDetail()">‹</button>
+    <img id="detail-img" src="" alt="">
+  </div>
+  <div class="detail-title" id="detail-title"></div>
+  <div class="detail-subtitle" id="detail-subtitle"></div>
+  <div class="section-label">СОДЕРЖАНИЕ</div>
+  <div class="content-list" id="content-list"></div>
+
+  <div style="margin-top:22px;">
+    <div class="section-label">ДРУГИЕ КИТЫ</div>
+    <div class="other-kits-section">
+      <div class="other-kits-scroll" id="other-kits-scroll"></div>
+    </div>
+  </div>
+
+  <button class="btn-buy" id="btn-buy" onclick="openModal()">ПОЛУЧИТЬ КИТ</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     МОДАЛЬНОЕ ОКНО — КАК ПОЛУЧИТЬ КИТ
+═══════════════════════════════════════════════ -->
+<div id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div id="modal-sheet">
+    <div class="modal-handle"></div>
+    <div class="sub-block-header">
+      <div class="sub-icon">🎁</div>
+      <div class="sub-texts">
+        <div class="sub-title">Как получить кит?</div>
+        <div class="sub-desc">Выполни условие и получи кит в лс</div>
+      </div>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="sub-step" id="step1">
+      <div class="step-num" id="step1-num">1</div>
+      <span>Подпишись на канал <b></b></span>
+    </div>
+    <div class="sub-step" id="step2" style="opacity:.45">
+      <div class="step-num" id="step2-num">2</div>
+      <span>Нажми «Проверить подписку» ниже</span>
+    </div>
+    <div class="sub-step" id="step3" style="opacity:.45">
+      <div class="step-num" id="step3-num">3</div>
+      <span>Получи кит в личные сообщения </span>
+    </div>
+    <div class="modal-divider"></div>
+    <button class="btn-go-channel" onclick="goToChannel()">ПЕРЕЙТИ НА КАНАЛ</button>
+    <button class="btn-check-sub" id="btn-check-sub" onclick="checkSubscription()">✅ ПРОВЕРИТЬ ПОДПИСКУ</button>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
